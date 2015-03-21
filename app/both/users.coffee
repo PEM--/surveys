@@ -1,8 +1,12 @@
 @UserSchema = new SimpleSchema
-  email:
-    label: 'Identifiant (email)'
+  emails:
+    type: [Object]
+    min: 1
+  "emails.$.address":
     type: String
     regEx: SimpleSchema.RegEx.Email
+  createdAt:
+    type: Date
   profile:
     type: Object
   'profile.civility':
@@ -31,7 +35,7 @@
     optional: true
     blackbox: true
 
-#Meteor.users.attachSchema @UserSchema
+Meteor.users.attachSchema @UserSchema
 
 if Meteor.isServer
   if Meteor.users.find().count() is 0
@@ -44,4 +48,6 @@ if Meteor.isServer
         civility: Meteor.settings.admin.civility
     Roles.addUsersToRoles adminId, ['admin'], Roles.GLOBAL_GROUP
   Meteor.publish null, -> Meteor.roles.find {}
-  Meteor.users.permit(['insert', 'update', 'remove']).ifHasRole('admin').apply()
+  Meteor.users.permit ['insert', 'update', 'remove']
+    .ifHasRole 'admin'
+    .apply()

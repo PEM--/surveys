@@ -2,7 +2,9 @@ Router.configure
   layoutTemplate: 'layout'
   loadingTemplate: 'loading'
   notFoundTemplate: 'notFound'
-  waitOn: -> Meteor.subscribe 'surveys'
+  waitOn: ->
+    return false unless Meteor.loggingIn()
+    Meteor.subscribe 'surveys'
   onBeforeAction: ->
     unless Meteor.userId()
       @render 'login'

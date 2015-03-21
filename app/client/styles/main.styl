@@ -1,9 +1,7 @@
 @import 'nib'
 @import 'typographic'
 @import 'jeet'
-@import '/client/styles/colors.import'
-@import '/client/styles/animations.import'
-@import '/client/styles/fonts.import'
+@import '/client/styles/*.import'
 
 // Normalize CSS using Axis
 normalize-css()
@@ -33,6 +31,7 @@ section
   margin-top 5px
   center(maxSize)
   transition all defaultTransitionValue
+  height 100%
 
 // Styles on text content
 h1

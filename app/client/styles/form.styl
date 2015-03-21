@@ -3,96 +3,12 @@
 @import '/client/styles/animations.import'
 @import '/client/styles/fonts.import'
 
-button, .btn
+button
   button()
   transition all defaultTransitionValue
+  hover-darken()
+  color bgColor
   background-color brandPrimary
-  hover-darken()
-  hover-pop()
-  color bgColor
   &:focus
-    background-color brandPrimary
-
-embedIcon(icon)
-  &:before
-    content icon
-    font-family FontAwesome
-    margin-right 5px
-
-button[data-role='delete']
-  background-color brandDanger
-  hover-darken()
-  embedIcon('\f014')
-
-button[data-role='modify']
-  background-color brandInfo
-  hover-darken()
-  embedIcon('\f044')
-
-button[data-role='add']
-  color bgColor
-  embedIcon('\f067')
-
-form
-  width 100%
-  delayedAnimation()
-  .form-group
-    field()
-    column()
-    label, input, span
-      column(1/3)
-    button
-      shift(1/3)
-    label
-      overflow ellipsis
-    input
-      input()
-      padding .25em
-      margin-bottom .3rem
-    &.has-error
-      field-error brandDanger
-      span
-        flash 'error'
-        padding 5px
-        animation-name fadeInRight
-        animation-duration .8s
-.panel
-  column()
-  border-radius 3px
-  border 1px solid brandPrimary
-  margin-bottom 5px
-  div.panel-heading
-    column()
-    background-color brandColor
     color bgColor
-    padding 5px
-    margin-bottom 5px
-    fontSize()
-  .panel-body
-    margin-top 5px
-    padding 5px
-  ul
-    inline-list()
-    padding 5px
-    li
-      column()
-
-autoformButton(icon, color)
-  background-color color
-  hover-darken()
-  embedIcon(icon)
-  content none
-  size 22px 22px
-  fs 16px
-  text-align center
-  padding 3px
-  margin-bottom 3px
-  &:before
-    margin 0
-  &:focus
-    background-color @background-color
-
-button.autoform-remove-item
-  autoformButton('\f014', brandDanger)
-.autoform-add-item
-  autoformButton('\f067', brandPrimary)
+    background-color brandPrimary

@@ -40,4 +40,4 @@
 
 if Meteor.isServer
   Meteor.publish 'surveys', -> Surveys.find()
-  @Surveys.permit(['insert', 'update', 'remove']).ifLoggedIn().apply()
+  (@Surveys.permit ['insert', 'update', 'remove']).ifLoggedIn().apply()

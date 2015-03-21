@@ -1,0 +1,72 @@
+@import 'nib'
+@import 'jeet'
+@import '/client/styles/*.import'
+
+borderColor = brandColor
+
+article[data-role='login']
+  size 100% 100%
+  display flex
+  flex-direction row
+  flex-wrap nowrap
+  justify-content center
+  align-content center
+  align-items center
+  main
+    animation-name fadeInDown
+    animation-duration .8s
+    padding 25px
+    border-radius 3px
+    border 1px solid borderColor
+    box-shadow 0 0 5px lighten(borderColor, 50%) inset
+    size 450px auto
+    h1
+      text-align center
+    p
+      margin 0
+    input, button
+      width 100%
+      margin-top 1.5em
+      box-sizing border-box
+      outline none
+      border none
+      transition all defaultTransitionValue
+      &:focus, &:active
+        box-shadow 0 2px 0 lighten(brandColor, 50%)
+    input
+      background-color bgColor
+      border-bottom 1px solid brandColor
+      &::placeholder
+        transition color defaultTransitionValue
+        color brandColor
+      &:focus::placeholder
+        color lighten(brandColor, 50%)
+    button
+      color bgColor
+      margin-top 2em
+      border 1px solid brandColor
+      position relative
+      display inline-block
+      padding-left 65px
+      &:focus
+        color white
+      &:before
+        absolute top left
+        padding 0
+        line-height 180%
+        font-size 140%
+        size 45px 100%
+        color brandColor
+        background-color lighten(brandColor, 50%)
+        border-top-left-radius 2px
+        border-bottom-left-radius 2px
+        font-family FontAwesome
+        content '\f08b'
+        transition all defaultTransitionValue
+      &:hover
+        transition all defaultTransitionValue
+        border 1px solid darken(brandColor, 30%)
+        &:before
+          transition all defaultTransitionValue
+          width 55px
+          color darken(brandColor, 30%)
