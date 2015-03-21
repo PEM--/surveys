@@ -1,33 +1,47 @@
 @UserSchema = new SimpleSchema
-  name:
-    label: 'Nom'
+  email:
+    label: 'Identifiant (email)'
     type: String
-    min: 2
-    max: 200
-  forname:
-    label: 'Prénom'
-    type: String
-    min: 2
-    max: 200
-  civility:
+    regEx: SimpleSchema.RegEx.Email
+  profile:
+    type: Object
+  'profile.civility':
     label: 'Civilité'
     type: String
     allowedValues: ['M.', 'Mlle', 'Mme', 'Dr']
-  username:
-    label: 'Nom d\'utilisateur (email)'
+  'profile.name':
+    label: 'Nom'
     type: String
-    regEx: SimpleSchema.RegEx.Email
-  password:
-    label: 'Mot de passe'
+    min: 2
+    max: 30
+    regEx: /^[a-z0-9A-Z_]{2,30}$/
+  'profile.forname':
+    label: 'Prénom'
     type: String
-    min: 6
-    max: 10
+    min: 2
+    max: 30
+    regEx: /^[a-z0-9A-Z_]{2,30}$/
   roles:
     type: Object
     blackbox: true
+    optional: true
+    allowedValues: ['admin']
+  services:
+    type: Object
+    optional: true
+    blackbox: true
 
-Meteor.users.attachSchema @UserSchema
+#Meteor.users.attachSchema @UserSchema
 
 if Meteor.isServer
-  #Roles.addUsersToRoles userId, ['admin'], Roles.GLOBAL_GROUP
+  if Meteor.users.find().count() is 0
+    adminId = Accounts.createUser
+      email: Meteor.settings.admin.email
+      password: Meteor.settings.admin.password
+      profile:
+        name: Meteor.settings.admin.name
+        forname: Meteor.settings.admin.forname
+        civility: Meteor.settings.admin.civility
+    Roles.addUsersToRoles adminId, ['admin'], Roles.GLOBAL_GROUP
+  Meteor.publish null, -> Meteor.roles.find {}
   Meteor.users.permit(['insert', 'update', 'remove']).ifHasRole('admin').apply()

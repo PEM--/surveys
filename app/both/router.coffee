@@ -3,6 +3,11 @@ Router.configure
   loadingTemplate: 'loading'
   notFoundTemplate: 'notFound'
   waitOn: -> Meteor.subscribe 'surveys'
+  onBeforeAction: ->
+    unless Meteor.userId()
+      @render 'login'
+    else
+      @next()
 
 # Route declaration
 Router.map ->
