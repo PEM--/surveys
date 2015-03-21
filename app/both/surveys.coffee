@@ -39,12 +39,5 @@
     max: 100
 
 if Meteor.isServer
-  ###
-  if @Surveys.find().count() is 0
-    @Surveys.insert
-      title: 'Ulysses'
-      author: 'James Joyce'
-      copies: 2
-  ###
   Meteor.publish 'surveys', -> Surveys.find()
-  @Surveys.permit(['insert', 'update', 'remove']).apply()
+  @Surveys.permit(['insert', 'update', 'remove']).ifLoggedIn().apply()
