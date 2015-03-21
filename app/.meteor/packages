@@ -28,6 +28,7 @@ multiply:iron-router-progress
 # Security
 browser-policy
 matteodem:easy-security
+ongoworks:security
 
 # Developments
 audit-argument-checks
