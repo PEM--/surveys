@@ -1,0 +1,43 @@
+@import 'nib'
+@import 'typographic'
+@import 'jeet'
+@import '/client/styles/colors.import'
+@import '/client/styles/animations.import'
+@import '/client/styles/fonts.import'
+
+// Normalize CSS using Axis
+normalize-css()
+
+monoFont = segoe
+
+// Set fonts and default colors
+t-headers(monoFont)
+html, body
+  background-color bgColor
+  color textColor
+  font-family monoFont
+  transition all defaultTransitionValue
+  fontSize()
+
+// Globally set the sizing behavior
+*, *::after, *::before
+  box-sizing border-box
+
+// Set page height
+html, body
+  height 100%
+
+// 960 the complete site
+// debug jeet: edit()
+section
+  margin-top 5px
+  center(maxSize)
+  transition all defaultTransitionValue
+
+// Styles on text content
+h1
+  animation-name fadeInDown
+  animation-duration .8s
+p
+  text-align justify
+  delayedAnimation()

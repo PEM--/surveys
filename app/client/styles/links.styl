@@ -1,0 +1,28 @@
+@import 'nib'
+@import '/client/styles/colors.import'
+@import '/client/styles/animations.import'
+
+a
+  reset-link()
+  font-weight bold
+  color brandColor
+  position relative
+  display inline-block
+  padding 0
+  transition color defaultTransitionValue
+  hover-darken()
+
+  &::after
+    absolute bottom left
+    size 100% 1px
+    background brandColor
+    content ''
+    opacity 0
+    transition height defaultTransitionValue, opacity defaultTransitionValue, transform defaultTransitionValue
+    transform translateY(-10px)
+
+  &:hover::after, &:focus::after
+    height 2px
+    rounded()
+    opacity 1
+    transform translateY(0px)
