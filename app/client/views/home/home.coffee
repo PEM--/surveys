@@ -7,3 +7,7 @@ Template.home.events
     Router.go "/survey/#{e.target.getAttribute 'data-value'}"
   'click [data-role=\'modify\']': (e) ->
     Router.go "/surveys/#{e.target.getAttribute 'data-value'}"
+
+AutoForm.hooks
+  insertSurvey: onSuccess: -> Router.go '/'
+  updateSurvey: onSuccess: -> Router.go '/'

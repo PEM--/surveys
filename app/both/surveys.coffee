@@ -18,9 +18,10 @@
     max: 200
   populations:
     type: [Object]
-    label: 'Populations'
-    min: 1
-    max: 4
+    minCount: 1
+    maxCount: 4
+    autoform:
+      template: 'mafObjectField_bootstrap3'
   'populations.$.population.name':
     type: String
     label: 'Nom de la population'

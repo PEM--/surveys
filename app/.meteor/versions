@@ -64,7 +64,7 @@ msavin:mongol@1.0.2
 multiply:iron-router-progress@1.0.1
 npm-bcrypt@0.7.8_1
 observe-sequence@1.0.5
-ongoworks:security@1.0.1
+ongoworks:security@1.1.0
 ordered-dict@1.0.3
 random@1.0.3
 reactive-dict@1.1.0
