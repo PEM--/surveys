@@ -1,6 +1,8 @@
+@import 'jeet'
+
 [data-role='survey']
   .d3-chart-fixed-height
-    height 100px
+    center(400px)
   .d3-svg-container
     display inline-block
     position relative
@@ -8,9 +10,8 @@
     padding-bottom 50%
     vertical-align middle
     overflow hidden
+    height inherit
   .d3-svg-content
     display inline-block
-    position absolute
-    top 0
-    left 0
-    border 3px solid red
+    absolute top 0 left 0
+    height inherit

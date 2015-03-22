@@ -1,13 +1,12 @@
 Template.survey.rendered = ->
-  console.log @data
-  margin = top: 10, right: 10, bottom: 10, left: 10
+  margin = top: 50, right: 10, bottom: 0, left: 10
   svg = width: 400, height: 200
   graph_dim =
     width: svg.width - margin.left - margin.right
     height: svg.height - margin.top - margin.bottom
   radius = Math.min graph_dim.width, graph_dim.height
   color = d3.scale.ordinal()
-    .range ['#1cb22d', '#b2ae1b', '#b26c1b', '#b21b1b']
+    .range ['#1cb22d', '#efe524', '#ef9e10', '#b21b1b']
   arc = d3.svg.arc()
     .innerRadius .8 * radius
     .outerRadius radius

@@ -1,9 +1,19 @@
 article(data-role='home')
   h1 Questionnaires
   button(data-role='new') Nouveau questionnaire
-  ul
-    each this
-      li
-        a(href="survey/{{_id}}")= name
+  table
+    thead: tr
+      th Nom
+      th Question
+      th Actions
+    tbody
+      each this
+        tr
+          td= name
+          td= question
+          td
+            button(data-value=_id, data-role='view')
+            button(data-value=_id, data-role='modify')
+            button(data-value=_id, data-role='remove')
   
   

@@ -12,6 +12,10 @@ a
   transition color defaultTransitionValue
   hover-darken()
 
+  &:focus
+    outline none
+    box-shadow 0 2px 0 lighten(brandColor, 50%)
+
   &::after
     absolute bottom left
     size 100% 1px
@@ -19,7 +23,7 @@ a
     content ''
     opacity 0
     transition height defaultTransitionValue, opacity defaultTransitionValue, transform defaultTransitionValue
-    transform translateY(-10px)
+    transform translateY(10px)
 
   &:hover::after, &:focus::after
     height 2px
