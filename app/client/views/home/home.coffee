@@ -8,6 +8,9 @@ Template.home.events
   'click [data-role=\'modify\']': (e) ->
     e.preventDefault()
     Router.go "/surveys/#{e.target.getAttribute 'data-value'}"
+  'click [data-role=\'remove\']': (e) ->
+    e.preventDefault()
+    Surveys.remove e.target.getAttribute 'data-value'
 
 AutoForm.hooks
   insertSurvey: onSuccess: -> Router.go '/'

@@ -5,7 +5,7 @@ Template.survey.rendered = ->
     width: svg_dim.width - margin.left - margin.right
     height: svg_dim.height - margin.top - margin.bottom
   radius = Math.min graph_dim.width, graph_dim.height
-  color_range = ['#1cb22d', '#efe524', '#ef9e10', '#b21b1b']
+  color_range = ['#0F7875', '#19A89D', '#D21B5B', '#9C0B5D']
   color = d3.scale.ordinal().range color_range
   arcs = [
     d3.svg.arc().innerRadius(.8*radius).outerRadius radius

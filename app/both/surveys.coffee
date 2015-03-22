@@ -14,11 +14,7 @@
     label: 'Réponses'
     minCount: 4
     maxCount: 4
-  'answers.$.answer':
-    type: String
-    label: 'Réponse'
     max: 200
-    autoform: placeholder: 'Sélection possible du répondant'
   populations:
     type: [Object]
     minCount: 1
@@ -34,12 +30,9 @@
     decimal: true
     minCount: 4
     maxCount: 4
-  'populations.$.population.values.$.value':
-    type: Number
-    label: 'Valeur'
-    decimal: true
     min: 0.0
     max: 100.0
+
 @Surveys = new Meteor.Collection 'surveys'
 @Surveys.attachSchema @SurveysSchema
 
