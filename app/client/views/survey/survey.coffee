@@ -1,5 +1,4 @@
 Template.survey.rendered = ->
-  console.log @data
   margin = top: 50, right: 150, bottom: 0, left: 0
   svg_dim = width: 500, height: 200
   graph_dim =
@@ -8,14 +7,22 @@ Template.survey.rendered = ->
   radius = Math.min graph_dim.width, graph_dim.height
   color_range = ['#1cb22d', '#efe524', '#ef9e10', '#b21b1b']
   color = d3.scale.ordinal().range color_range
-  arc = d3.svg.arc()
-    .innerRadius .8 * radius
-    .outerRadius radius
-  pie = d3.layout.pie()
-    .sort null
-    .startAngle -Math.PI/2
-    .endAngle Math.PI/2
-    .value (d) -> d
+  arcs = [
+    d3.svg.arc().innerRadius(.8*radius).outerRadius radius
+    d3.svg.arc().innerRadius(.6*radius).outerRadius .8*radius
+    d3.svg.arc().innerRadius(.4*radius).outerRadius .6*radius
+    d3.svg.arc().innerRadius(.2*radius).outerRadius .4*radius
+  ]
+  pies = [
+    d3.layout.pie().sort(null).startAngle(-Math.PI/2).endAngle(Math.PI/2)\
+      .value (d) -> d
+    d3.layout.pie().sort(null).startAngle(-Math.PI/2).endAngle(Math.PI/2)\
+      .value (d) -> d
+    d3.layout.pie().sort(null).startAngle(-Math.PI/2).endAngle(Math.PI/2)\
+      .value (d) -> d
+    d3.layout.pie().sort(null).startAngle(-Math.PI/2).endAngle(Math.PI/2)\
+      .value (d) -> d
+  ]
   svg = d3.select '[data-chart=\'survey\']'
     .append 'svg:svg'
     .attr 'preserveAspectRatio', 'xMinYMin meet'
@@ -25,15 +32,16 @@ Template.survey.rendered = ->
     .attr 'transform', "translate(\
       #{margin.left + graph_dim.width/2},\
       #{margin.top + graph_dim.height})"
-  g = graph
-    .selectAll '.arc'
-    .data pie @data.populations[0].population.values
-    .enter()
-      .append 'g'
-      .attr 'class', 'arc'
-  g.append 'path'
-    .attr 'd', arc
-    .style 'fill', (d, i) -> color i
+  for population, idx in @data.populations
+    g = graph
+      .selectAll ".arc#{idx}"
+      .data pies[idx] population.population.values
+      .enter()
+        .append 'g'
+        .attr 'class', "arc#{idx}"
+    g.append 'path'
+      .attr 'd', arcs[idx]
+      .style 'fill', (d, i) -> color i
   svg.append 'text'
     .attr 'class', 'graph-title'
     .attr 'text-anchor', 'middle'
