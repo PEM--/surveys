@@ -1,4 +1,5 @@
 @import 'jeet'
+@import '/client/styles/*.import'
 
 [data-role='survey']
   .d3-chart-fixed-height
@@ -15,3 +16,11 @@
     display inline-block
     absolute top 0 left 0
     height inherit
+    border-bottom 1px solid brandColor
+  text
+    stroke none
+    &.legend, &.graph-title
+      fill brandColor
+    &.graph-title
+      font-size 18px
+      font-weight bold
