@@ -1,0 +1,4 @@
+template(name='afObjectField_personal')
+  if afFieldIsInvalid name=this.name
+    span.help-block {{{afFieldMessage name=this.name}}}
+  +afQuickFields quickFieldsAtts
