@@ -1,5 +1,3 @@
-@Surveys = new Meteor.Collection 'surveys'
-@Surveys.attachSchema @SurveysSchema
 @SurveysSchema = new SimpleSchema
   name:
     type: String
@@ -12,10 +10,10 @@
   answers:
     type: [String]
     label: 'Réponses'
-    min: 4
-    max: 4
+    minCount: 4
+    maxCount: 4
   'answers.$.answer':
-    type: Object
+    type: String
     label: 'Réponse'
     max: 200
   populations:
@@ -30,14 +28,18 @@
   'populations.$.population.values':
     type: [Number]
     label: 'Valeurs'
-    min: 4
-    max: 4
+    decimal: true
+    minCount: 4
+    maxCount: 4
   'populations.$.population.values.$.value':
     type: Number
     label: 'Valeur'
-    min: 0
-    max: 100
+    decimal: true
+    min: 0.0
+    max: 100.0
+@Surveys = new Meteor.Collection 'surveys'
+@Surveys.attachSchema @SurveysSchema
 
 if Meteor.isServer
   Meteor.publish 'surveys', -> Surveys.find()
-  (@Surveys.permit ['insert', 'update', 'remove']).ifLoggedIn().apply()
+  @Surveys.permit(['insert', 'update', 'remove']).ifLoggedIn().apply()

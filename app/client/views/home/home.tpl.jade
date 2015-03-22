@@ -1,0 +1,9 @@
+article(data-role='home')
+  h1 Questionnaires
+  button(data-role='new') Nouveau questionnaire
+  ul
+    each this
+      li
+        a(href="survey/{{_id}}")= name
+  
+  

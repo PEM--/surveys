@@ -2,9 +2,7 @@ Router.configure
   layoutTemplate: 'layout'
   loadingTemplate: 'loading'
   notFoundTemplate: 'notFound'
-  waitOn: ->
-    return false unless Meteor.loggingIn()
-    Meteor.subscribe 'surveys'
+  waitOn: -> Meteor.subscribe 'surveys'
   onBeforeAction: ->
     unless Meteor.userId()
       @render 'login'
@@ -13,8 +11,8 @@ Router.configure
 
 # Route declaration
 Router.map ->
-  @route 'home', path: '/'
-  @route 'surveys', data: -> Surveys.find()
+  @route '/home', path: '/', data: -> Surveys.find().fetch()
+  @route '/survey/:_id', name: 'survey', data: -> Surveys.findOne @params._id
   @route '/surveys/:_id',
     action: ->
       return @render 'upsert-survey' if @params._id is 'new'

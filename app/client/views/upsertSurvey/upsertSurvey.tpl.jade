@@ -1,0 +1,7 @@
+article(data-role='upsert-survey')
+  if this.name
+    h1 Modifier #{this.name}
+    +quickForm collection='Surveys' doc=this id='updateSurvey' type='update'
+  else
+    h1 Ajouter un nouveau questionnaire
+    +quickForm collection='Surveys' id='insertSurvey' type='insert'
