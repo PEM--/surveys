@@ -3,10 +3,12 @@
     type: String
     label: 'Nom'
     max: 200
+    autoform: placeholder: 'Nom du questionnaire'
   question:
     type: String
     label: 'Question'
     max: 200
+    autoform: placeholder: 'Question du questionnaire'
   answers:
     type: [String]
     label: 'Réponses'
@@ -16,16 +18,16 @@
     type: String
     label: 'Réponse'
     max: 200
+    autoform: placeholder: 'Sélection possible du répondant'
   populations:
     type: [Object]
     minCount: 1
     maxCount: 4
-    autoform:
-      template: 'mafObjectField_bootstrap3'
   'populations.$.population.name':
     type: String
     label: 'Nom de la population'
     max: 200
+    autoform: placeholder: 'Nom de la population'
   'populations.$.population.values':
     type: [Number]
     label: 'Valeurs'
