@@ -1,6 +1,3 @@
-Template.home.created = ->
-  console.log @data
-
 Template.home.events
   'click [data-role=\'new\']': (e) -> Router.go '/surveys/new'
   'click [data-role=\'view\']': (e) ->

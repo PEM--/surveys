@@ -16,7 +16,6 @@
     opacity: 1
     transform: translateX(0)
 
-
 @keyframes fadeIn
   0%
     opacity: 0
@@ -34,4 +33,15 @@
     opacity: 0
 .fadeOut
   animation-name fadeOut
+  animation-duration .8s
+
+@keyframes shake
+  0%, 100%
+    transform translate3d(0, 0, 0)
+  10%, 30%, 50%, 70%, 90%
+    transform translate3d(-10px, 0, 0)
+  20%, 40%, 60%, 80%
+    transform translate3d(10px, 0, 0)
+.shake
+  animation-name shake
   animation-duration .8s
