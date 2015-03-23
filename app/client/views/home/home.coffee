@@ -8,6 +8,12 @@ Template.home.events
   'click [data-role=\'modify\']': (e) ->
     e.preventDefault()
     Router.go "/surveys/#{e.target.getAttribute 'data-value'}"
+  'click [data-role=\'copy\']': (e) ->
+    e.preventDefault()
+    id = e.target.getAttribute 'data-value'
+    if Match.test id, String
+      survey = _.omit (_.findWhere Template.instance().data, _id: id), '_id'
+      Surveys.insert survey
   'click [data-role=\'remove\']': (e) ->
     e.preventDefault()
     Surveys.remove e.target.getAttribute 'data-value'
