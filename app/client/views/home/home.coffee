@@ -5,14 +5,12 @@ checkedInsertRemove = (e, isInsertion) ->
     if isInsertion
       survey = _.omit (_.findWhere Template.instance().data, _id: id), '_id'
       Surveys.insert survey, (err) ->
-        if err
-          console.log 'Error while inserting', err
+        setError 'Problème lors de l\'insertion' if err
     else
       Surveys.remove (e.target.getAttribute 'data-value'), (err) ->
-        if err
-          console.log 'Error while removing', err
+        setError 'Erreur à l\'effacement' if err
   else
-    console.log 'Unknown id'
+    setError 'Identifiant inconnu'
 
 Template.home.events
   'click [data-role=\'new\']': (e) ->
