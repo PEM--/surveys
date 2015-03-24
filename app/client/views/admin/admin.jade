@@ -1,0 +1,13 @@
+template(name='admin')
+  article(data-role='admin')
+    h1 Réglages
+    h2 Utilisateurs
+    button(data-role='create') Créer un nouvel utilisateur
+    main
+      ul
+        each users
+          +user
+
+template(name='user')
+  li(class=role)
+    p(class=title) #{profile.civility} #{profile.forname} #{profile.name}

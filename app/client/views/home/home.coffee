@@ -15,13 +15,13 @@ checkedInsertRemove = (e, isInsertion) ->
 Template.home.events
   'click [data-role=\'new\']': (e) ->
     e.preventDefault()
-    Router.go '/surveys/new'
+    Router.go '/survey/new'
   'click [data-role=\'view\']': (e) ->
     e.preventDefault()
     Router.go "/survey/#{e.target.getAttribute 'data-value'}"
   'click [data-role=\'modify\']': (e) ->
     e.preventDefault()
-    Router.go "/surveys/#{e.target.getAttribute 'data-value'}"
+    Router.go "/survey/edit/#{e.target.getAttribute 'data-value'}"
   'click [data-role=\'copy\']': (e) -> checkedInsertRemove e, true
   'click [data-role=\'remove\']': (e) -> checkedInsertRemove e, false
 

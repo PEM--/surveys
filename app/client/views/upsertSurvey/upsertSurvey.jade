@@ -1,0 +1,9 @@
+template(name='insertSurvey')
+  article(data-role='insertSurvey')
+    h1 Ajouter un nouveau questionnaire
+    +quickForm collection='Surveys' id='insertSurvey' type='insert' buttonContent='Ajouter' buttonClasses='add'
+
+template(name='updateSurvey')
+  article(data-role='upsert-survey')
+    h1 Modifier : #{this.name}
+    +quickForm collection='Surveys' doc=this id='updateSurvey' type='update' buttonContent='Modifier' buttonClasses='modify'
