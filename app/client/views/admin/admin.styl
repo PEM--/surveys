@@ -1,7 +1,7 @@
 @import '/client/styles/*.import'
 
 article[data-role='admin']
-  button[data-role='create']
+  button[data-role='create-user']
     &:before
       content '\f055'
   main
@@ -16,6 +16,8 @@ article[data-role='admin']
       align-items flex-start
       inline-list()
       li
+        cursor pointer
+        user-select none
         background-color lighten(brandColor, 30%)
         size 300px 55px
         padding 10px
@@ -23,24 +25,29 @@ article[data-role='admin']
         border-bottom 3px solid brandColor
         border-radius roundCorner
         color bgColor
-        &.admin
-          background-color lighten(brandDanger, 30%)
-          border 1px solid brandDanger
-          border-bottom 3px solid brandDanger
         p
+          pointer-events none
+          width @width - 2 * @padding
           margin 0
           padding 0
-        p::before
-          margin-right 10px
-          display inline-block
-          line-height 30px
-          size @line-height
-          border-radius @line-height
-          font-size .75 * @line-height
-          text-align center
-          background-color bgColor
-          color brandDanger
-          font-family FontAwesome
-          content ''
-        p.doc::before
-          content ''
+          overflow ellipsis
+          &::before
+            pointer-events none
+            margin-right 10px
+            display inline-block
+            line-height 30px
+            size @line-height
+            border-radius @line-height
+            font-size .75 * @line-height
+            text-align center
+            background-color bgColor
+            color brandColor
+            font-family FontAwesome
+            content ''
+          &.doc::before
+            content ''
+        &.admin
+          border-color brandDanger
+          background-color lighten(@border-color, 30%)
+          p::before
+            color @border-color

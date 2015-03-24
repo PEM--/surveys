@@ -17,3 +17,4 @@ Router.map ->
   @route '/survey/edit/:_id', name: 'updateSurvey', \
     data: -> Surveys.findOne @params._id
   @route '/admin'
+  @route '/admin/user/new', name: 'insertUser'

@@ -51,3 +51,13 @@ if Meteor.isServer
   Meteor.users.permit ['insert', 'update', 'remove']
     .ifHasRole 'admin'
     .apply()
+  ###
+  Meteor.methods
+    createUser: (user) ->
+      unless Meteor.user().hasRole 'admin'
+        console.log 'Current logged user isn\'t admin'
+        return false
+      unless Match.test user, UserSchema
+        console.log 'Shema validation failed'
+        return false
+  ###
