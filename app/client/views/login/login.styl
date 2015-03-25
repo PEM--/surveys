@@ -1,8 +1,5 @@
 @import 'nib'
-@import 'jeet'
 @import '/client/styles/*.import'
-
-borderColor = brandColor
 
 article[data-role='login']
   size 100% 100%
@@ -14,20 +11,18 @@ article[data-role='login']
   align-items center
   main
     animation-name fadeInDown
-    animation-timing-function ease-out
-    animation-duration .8s
+    longAnimation()
     padding 25px
-    border-radius 3px
-    border 1px solid borderColor
-    box-shadow 0 0 5px lighten(borderColor, 50%) inset
+    border-radius roundCorner
+    border 1px solid brandColor
+    box-shadow 0 0 5px lighten(brandColor, 50%) inset
     size 450px auto
     h1
       text-align center
-    p
       margin 0
-    input, button
+    form > span, button
+      margin-top 2em
       width 100%
-      margin-top 1.5em
     button
       &:before
         content '\f08b'

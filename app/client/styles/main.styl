@@ -17,9 +17,13 @@ html, body
   transition all defaultTransitionValue
   fontSize()
 
-// Globally set the sizing behavior
 *, *::after, *::before
+  // Globally set the sizing behavior
   box-sizing border-box
+  // Ensure font's antialising
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  -webkit-touch-callout none
 
 // Set page height
 html, body
@@ -36,8 +40,7 @@ section
 // Entrance animation
 article
   animation-name fadeInDown
-  animation-timing-function ease-out
-  animation-duration .8s
+  longAnimation()
 
 // Styles on text content
 p
