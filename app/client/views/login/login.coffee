@@ -26,6 +26,10 @@ checkAndAuthenticate = (username, password) ->
     return false
 
 Template.login.events
+  'focus input[type=\'email\'], focus input[type=\'password\']': (e, t) ->
+    (t.$ e.target).addClass 'filled'
+  'blur input[type=\'email\'], blur input[type=\'password\']': (e, t) ->
+    (t.$ e.target).removeClass 'filled' if e.target.value.length is 0
   'submit': (e, t) ->
     e.preventDefault()
     checkAndAuthenticate (t.$ '[name=\'username\']'),(t.$ '[name=\'password\']')

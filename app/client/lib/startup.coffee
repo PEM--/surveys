@@ -7,4 +7,4 @@ Meteor.startup ->
       $(this).removeClass anim
       next and next()
   Router.onAfterAction ->
-    _animate $('section'), _enterAnimation
+    _animate ($ 'section'), _enterAnimation
