@@ -33,11 +33,20 @@ Template.login.rendered = ->
       $el.addClass 'filled' unless $el.val().length is 0
   , 300
 
+buttonEvent = "#{ANIMATION_END_EVENT} button"
+
 Template.login.events
   'focus input[type=\'email\'], focus input[type=\'password\']': (e, t) ->
     (t.$ e.target).addClass 'filled'
   'blur input[type=\'email\'], blur input[type=\'password\']': (e, t) ->
     (t.$ e.target).removeClass 'filled' if e.target.value.length is 0
-  'submit': (e, t) ->
-    e.preventDefault()
-    checkAndAuthenticate (t.$ '[name=\'username\']'),(t.$ '[name=\'password\']')
+  'click button': (e, t) ->
+    $button = t.$ e.target
+    $button = $button.parent() unless $button.is 'button'
+    $button.addClass 'clicked'
+    $button.on ANIMATION_END_EVENT, ->
+      $button
+        .off ANIMATION_END_EVENT
+        .removeClass 'clicked'
+      checkAndAuthenticate (t.$ '[name=\'username\']'), \
+        (t.$ '[name=\'password\']')
