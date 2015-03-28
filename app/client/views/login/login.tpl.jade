@@ -1,6 +1,6 @@
 article(data-role='login')
   main
-    h1 Identifiez-vous
+    h1 Surveys
     form
       span
         input(type='email', id='username', name='username', autocapitalize='off', autofocus, minlength='5', maxlength='200')
@@ -10,11 +10,6 @@ article(data-role='login')
         input(type='password', id='password', name='password', placeholder='', autocapitalize='off', minlength='6', maxlength='20')
         label(for='password')
           span Votre mot de passe
-      //- button.small(type='button')
-      //-   i.fa.fa-check
-      //-   span J'accède aux données
-      
-      //- button.creative(type='button', data-role='connect') J'accède aux données
-      
-      button.inspiration(type='button')
+      button.small(type='button')
+        i.fa.fa-chevron-circle-right.fa-2x
         span J'accède aux données

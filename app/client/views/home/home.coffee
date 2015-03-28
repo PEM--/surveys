@@ -25,6 +25,7 @@ Template.home.events
   'click [data-role=\'copy\']': (e) -> checkedInsertRemove e, true
   'click [data-role=\'remove\']': (e) -> checkedInsertRemove e, false
 
+AutoForm.setDefaultTemplate 'plain'
 AutoForm.hooks
   insertSurvey: onSuccess: -> Router.go '/'
   updateSurvey: onSuccess: -> Router.go '/'
