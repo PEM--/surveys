@@ -10,7 +10,7 @@ form
       background transparent
       opacity 0
       transition opacity defaultTransitionValue
-      color bgColor
+      color textColor
     >label
       absolute left
       padding 0 .85em
@@ -23,15 +23,15 @@ form
         content ''
         absolute top left
         size 100%
-        transition transform defaultTransitionValue
+        transition transform defaultTransitionValue, border defaultTransitionValue
       &::before
-        border-top 2px solid brandColor
+        border-top 1px solid brandColor
         transform translate3d(0, 100%, 0) translate3d(0, -2px, 0)
         transition-delay .3s
       &::after
         z-index -1
         border-radius roundCorner
-        background brandColor
+        background rgba(brandColor, .1)
         transform scale3d(1, 0, 1)
         transform-origin 50% 0%
     >input:focus, >input.filled
@@ -43,7 +43,7 @@ form
         &::before, &::after
           transition-delay 0s
         &::before
-          width calc(100% - 3px)
+          border-color rgba(brandColor, .1)
           transform translate3d(0, 0, 0)
         &::after
           transform scale3d(1, 1, 1)

@@ -41,12 +41,13 @@ Template.login.events
   'blur input[type=\'email\'], blur input[type=\'password\']': (e, t) ->
     (t.$ e.target).removeClass 'filled' if e.target.value.length is 0
   'click button': (e, t) ->
+    console.log 'Clicked', e.target
     $button = t.$ e.target
     $button = $button.parent() unless $button.is 'button'
     $button.addClass 'clicked'
-    $button.on ANIMATION_END_EVENT, ->
+    $button.on TRANSITION_END_EVENT, ->
       $button
-        .off ANIMATION_END_EVENT
+        .off TRANSITION_END_EVENT
         .removeClass 'clicked'
       checkAndAuthenticate (t.$ '[name=\'username\']'), \
         (t.$ '[name=\'password\']')
