@@ -1,10 +1,19 @@
+Template.insertUser.created = ->
+  @rxCivility = new ReactiveVar
+  @rxCivility.set ''
+  @autorun (computation) =>
+    civility = @rxCivility.get()
+    unless computation.firstRun
+      $selectCustom = @$ '.select-custom'
+      $selectCustom.addClass 'filled'
+
+Template.insertUser.helpers
+  civility: ->
+    UserSchema.schema()['profile.civility'].allowedValues
+  selectedCivility: -> Template.instance().rxCivility.get()
+
+
 Template.insertUser.events
-  submit: (e) ->
-    console.log e
-    e.preventDefault()
-
-    #Router.go '/admin'
-
   'focus input[type=\'email\'], \
     focus input[type=\'password\'], \
     focus input[type=\'text\']': (e, t) ->
@@ -13,14 +22,14 @@ Template.insertUser.events
     blur input[type=\'password\'], \
     blur input[type=\'text\']': (e, t) ->
     (t.$ e.target).removeClass 'filled' if e.target.value.length is 0
-  'focus .select-custom': (e, t) ->
-    (t.$ 'p').addClass 'filled'
-  'blur .select-custom': (e, t) ->
-    $p = t.$ 'p'
-    $p.removeClass 'filled' if $p.text().length is 0
+  'click .select-custom li': (e, t) ->
+    t.rxCivility.set e.target.textContent
 
-
-Template.insertUser.helpers
-  civility: ->
-    UserSchema.schema()['profile.civility'].allowedValues
-  selectedCivility: -> ''
+  'click button': (e, t) ->
+    $button = t.$ e.target
+    $button = $button.parent() unless $button.is 'button'
+    $button.addClass 'clicked'
+    $button.on TRANSITION_END_EVENT, ->
+      $button
+        .off TRANSITION_END_EVENT
+        .removeClass 'clicked'

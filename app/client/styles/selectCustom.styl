@@ -21,7 +21,7 @@
     font-weight bold
     font-size 70.25%
     color brandColor
-    transition transform defaultTransitionValue
+    transition transform .3s ease-out
     &::before
       color @color
       font-family FontAwesome
@@ -59,6 +59,11 @@
     position relative
     margin-top 3em
     user-select none
+    &::after
+      content ''
+      size 100%
+      absolute bottom 1px left
+      border-bottom 1px solid brandColor
     >ul
       reset-list()
       absolute top -2px left 1em

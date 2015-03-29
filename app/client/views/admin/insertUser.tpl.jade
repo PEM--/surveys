@@ -7,19 +7,20 @@ article(data-role='insertUser')
       div: ul
         each civility
           li(data-option, data-value=this)= this
-    span
+    span.input
       input(type='text', id='name', name='name', autocomplete='off', autocapitalize='on', minlength='2', maxlength='200')
       label(for='name'): span Nom
-    span
+    span.input
       input(type='text', id='forname', name='forname', autocomplete='off', autocapitalize='on', minlength='2', maxlength='200')
       label(for='forname'): span Prénom
-    span
+    span.input
       input(type='email', id='email', name='email', autocomplete='off', autocapitalize='off', minlength='5', maxlength='200')
       label(for='email'): span Email
-    span
+    span.input
       input(type='password', id='password', name='password', placeholder='', autocapitalize='off', minlength='6', maxlength='20')
       label(for='password'): span Mot de passe
-    label(for='admin') Compte administrateur
-    input(type='checkbox', id='admin', name='admin', value='true')
-    button.inspiration(data-role='add', type='submit')
+    span.checkbox
+      label(for='admin') Compte administrateur
+      input(type='checkbox', id='admin', name='admin', value='true')
+    button.inspiration(data-role='add', type='button')
       span Ajouter le nouvel utilisateur
