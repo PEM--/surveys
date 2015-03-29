@@ -26,8 +26,8 @@
     max: 30
     regEx: /^[a-z0-9A-Z_]{2,30}$/
   roles:
-    type: [Object]
     blackbox: true
+    type: Object
     optional: true
     allowedValues: ['admin']
   services:

@@ -2,7 +2,8 @@ template(name='admin')
   article(data-role='admin')
     h1 Réglages
     h2 Utilisateurs
-    button(data-role='create-user') Créer un nouvel utilisateur
+    button.inspiration(type='button', data-role='create-user')
+      span Créer un nouvel utilisateur
     main
       ul
         each users
@@ -11,20 +12,3 @@ template(name='admin')
 template(name='user')
   li(class=role)
     p(class=title) #{profile.civility} #{profile.forname} #{profile.name}
-
-template(name='insertUser')
-  article(data-role='insertUser')
-    h1 Ajouter un nouvel utilisateur
-    form(autocomplete='off', name='insertUser')
-      label(for='civility') Civilité
-      select(name='civility', autofocus)
-        each civility
-          option(value=this)= this
-      label(for='name') Nom
-      input(type='text', id='name', name='name', placeholder='Nom', autocomplete='off', autocapitalize='on', minlength='2', maxlength='200')
-      label(for='forname') Prénom
-      input(type='text', id='forname', name='forname', placeholder='Prénom', autocomplete='off', autocapitalize='on', minlength='2', maxlength='200')
-      label(for='email') Email
-      input(type='email', id='email', name='email', placeholder='email', autocomplete='off', autocapitalize='off', minlength='5', maxlength='200')
-      button(data-role='add', type='submit') Ajouter le nouvel utilisateur
-    // +quickForm collection='Meteor.users' id='insertUser' type='insert' buttonContent='Ajouter' buttonClasses='add'

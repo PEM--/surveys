@@ -1,4 +1,5 @@
 // http://tympanus.net/codrops/2015/01/08/inspiration-text-input-effects/
+@import 'nib'
 @import '/client/styles/*.import'
 
 form
@@ -9,7 +10,6 @@ form
     max-width 400px
     width calc(100% - 2em)
     vertical-align top
-
     >input
       position relative
       display block
@@ -22,10 +22,8 @@ form
       color textColor
       font-weight bold
       -webkit-appearance none
-
       &:focus
         outline none
-
     >label
       display inline-block
       float right
@@ -35,7 +33,6 @@ form
       font-weight bold
       font-size 70.25%
       user-select none
-
       span
         position relative
         display block

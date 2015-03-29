@@ -33,8 +33,6 @@ Template.login.rendered = ->
       $el.addClass 'filled' unless $el.val().length is 0
   , 300
 
-buttonEvent = "#{ANIMATION_END_EVENT} button"
-
 Template.login.events
   'focus input[type=\'email\'], focus input[type=\'password\']': (e, t) ->
     (t.$ e.target).addClass 'filled'
