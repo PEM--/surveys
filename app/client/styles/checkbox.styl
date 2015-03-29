@@ -1,0 +1,51 @@
+@import 'nib'
+@import '/client/styles/*.import'
+
+form
+  >span.checkbox
+    z-index 1
+    display inline-block
+    width calc(100% - 2em)
+    margin-top 2em
+    position relative
+    max-width 400px
+    vertical-align top
+    >label
+      display inline-block
+      float left
+      color brandColor
+      font-weight bold
+      font-size 70.25%
+      user-select none
+      padding 2em .85em
+    input[type='checkbox']
+      outline none
+      background rgba(red, .3)
+      border-radius 2em
+      cursor pointer
+      size 2*@border-radius @border-radius
+      absolute bottom
+      left calc(100% - 4em)
+      //padding-right 2em
+      position absolute
+      appearance none
+      transition defaultTransitionValue
+      &::after
+        border 2px solid brandColor
+        background bgColor
+        border-radius @border-radius
+        color rgba(brandColor, 0)
+        font-family FontAwesome
+        text-align center
+        content '\f00c'
+        display block
+        size @border-radius
+        relative top left
+        transition defaultTransitionValue
+        line-height 0.9*@border-radius
+      &:checked
+        background rgba(green, .3)
+        padding-left @border-radius
+        padding-right 0
+      &:checked::after
+        color rgba(brandColor, 1)
