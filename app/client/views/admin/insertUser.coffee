@@ -12,7 +12,6 @@ Template.insertUser.helpers
     UserSchema.schema()['profile.civility'].allowedValues
   selectedCivility: -> Template.instance().rxCivility.get()
 
-
 Template.insertUser.events
   'focus input[type=\'email\'], \
     focus input[type=\'password\'], \
