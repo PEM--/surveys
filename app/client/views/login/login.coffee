@@ -7,8 +7,7 @@ checkAndAuthenticate = (username, password) ->
       password.addClass 'shake'
     , 0
   unless Match.test \
-      {email: username.val(), password: password.val()}, \
-      lightLoginSchema
+      {email: username.val(), password: password.val()}, LoginSchema
     notifyWrongCase username, password
     return false
   Meteor.loginWithPassword username.val(), password.val(), (err) ->

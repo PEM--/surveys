@@ -61,7 +61,7 @@ momentjs:moment@2.8.4
 mongo@1.1.0
 mquandalle:jade@0.4.1
 mquandalle:stylus@1.1.0
-msavin:mongol@1.0.11
+msavin:mongol@1.0.12
 multiply:iron-router-progress@1.0.1
 npm-bcrypt@0.7.8_1
 observe-sequence@1.0.5

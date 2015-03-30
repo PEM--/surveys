@@ -1,4 +1,13 @@
-nameRegEx = /^[a-z0-9A-Z_\-����]{2,30}$/
+@LoginSchema = new SimpleSchema
+  email:
+    type: String
+    regEx: SimpleSchema.RegEx.Email
+  password:
+    type: String
+    min: 6
+    max: 20
+
+nameRegEx = /^[a-z0-9A-Z_\-]{2,30}$/
 
 @UserSchema = new SimpleSchema
   emails:
@@ -9,10 +18,11 @@ nameRegEx = /^[a-z0-9A-Z_\-����]{2,30}$/
     regEx: SimpleSchema.RegEx.Email
   createdAt:
     type: Date
+    blackbox: true
   profile:
     type: Object
   'profile.civility':
-    label: 'Civilit�'
+    label: 'Civilité'
     type: String
     allowedValues: ['M.', 'Mlle', 'Mme', 'Dr']
   'profile.name':
@@ -22,7 +32,7 @@ nameRegEx = /^[a-z0-9A-Z_\-����]{2,30}$/
     max: 30
     regEx: nameRegEx
   'profile.forname':
-    label: 'Pr�nom'
+    label: 'Prénom'
     type: String
     min: 2
     max: 30
@@ -50,28 +60,28 @@ if Meteor.isServer
         civility: Meteor.settings.admin.civility
     Roles.addUsersToRoles adminId, ['admin'], Roles.GLOBAL_GROUP
   Meteor.publish null, -> Meteor.roles.find {}
-  # Meteor.users.permit ['insert', 'update', 'remove']
-  #   .ifHasRole 'admin'
-  #   .apply()
+  Meteor.users.permit ['insert', 'update', 'remove']
+    .ifHasRole 'admin'
+    .apply()
   Meteor.publish 'users', ->
     if Roles.userIsInRole @userId, 'admin'
       Meteor.users.find()
     else
       Meteor.users.find _id: @userId
   Meteor.methods
-    mCreateUser: (user) ->
-      return 'Yes'
-      #throw new Meteor.error 'stuff', 'Marche pas ce machin'
-      # check user,
-      #   email: String
-      #   password: String
-      #   profile:
-      #     name: String
-      #     forname: String
-      #     civility: String
-      # unless Meteor.user().hasRole 'admin'
-      #   console.log 'Current logged user isn\'t admin'
-      #   return false
-      # unless Match.test user, UserSchema
-      #   console.log 'Shema validation failed'
-      #   return false
+    mCreateUser: (login, profile, admin) ->
+      unless Match.test login, LoginSchema
+        throw new Meteor.Error 'mCreateUser', 'Login non validé'
+      unless Match.test profile, UserSchema
+        throw new Meteor.Error 'mCreateUser', 'Profile non validé'
+      unless Match.test admin, Boolean
+        throw new Meteor.Error 'mCreateUser', 'Option non validé'
+      userId = Accounts.createUser
+        email: login.email
+        password: login.password
+        profile:
+          createdAt: new Date()
+          name: profile.profile.name
+          forname: profile.profile.forname
+          civility: profile.profile.civility
+      #Roles.addUsersToRoles userId, ['admin'], Roles.GLOBAL_GROUP if admin

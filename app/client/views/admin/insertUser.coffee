@@ -7,7 +7,7 @@ Template.insertUser.created = ->
       $selectCustom = @$ '.select-custom'
       $selectCustom.addClass 'filled'
   @userCtx = UserSchema.newContext()
-  @loginCtx = lightLoginSchema.newContext()
+  @loginCtx = LoginSchema.newContext()
 
 Template.insertUser.helpers
   civility: ->
@@ -35,19 +35,19 @@ Template.insertUser.events
         .off TRANSITION_END_EVENT
         .removeClass 'clicked'
     $form = t.$ 'form'
-    loginProfile =
+    login =
       email: ($form.find '#email').val()
       password: ($form.find '#password').val()
-    validationProfile =
-      emails: [{address: loginProfile.email }]
+    profile =
+      emails: [{address: login.email }]
       createdAt: new Date()
       profile:
         name: $form.find('#name').val()
         forname: $form.find('#forname').val()
         civility: t.rxCivility.get()
-    t.userCtx.validate validationProfile
+    t.userCtx.validate profile
     res = t.userCtx.invalidKeys()
-    t.loginCtx.validate loginProfile
+    t.loginCtx.validate login
     res = res.concat t.loginCtx.invalidKeys()
     for r in res
       do ->
@@ -69,18 +69,9 @@ Template.insertUser.events
         Meteor.setTimeout (-> $widget.addClass 'shake'), 0
         setError "#{msg} #{validationEndErrorMsg r.type}"
     return if res.length > 0
-    newUser =
-      email: loginProfile.email
-      password: loginProfile.password
-      profile:
-        name: validationProfile.profile.name
-        forname: validationProfile.profile.forname
-        civility: validationProfile.profile.civility
-    Meteor.call 'mCreateUser', newUser, (e, r) ->
-      setError e.reason if e
-    # console.log 'Prepare to insert', newUser
-    # Accounts.createUser newUser, (e, r) ->
-    #   setError e.reason if e
-    #   console.log 'Results',  e, r
-    #   # isAdmin = $form.find('admin').is ':checked'
-    #   #Roles.addUsersToRoles editedId, ['admin'], Roles.GLOBAL_GROUP
+    admin = $form.find('admin').is ':checked'
+    Meteor.call 'mCreateUser', login, profile, admin, (e, r) ->
+      check(e, Match.Any)
+      check(r, Match.Any)
+      return setError e.reason if e
+      Meteor.setTimeout (-> Router.go 'admin'), 300
