@@ -3,7 +3,7 @@ article(data-role='insertUser')
   form(autocomplete='off', name='insertUser')
     .select-custom(tabindex='0')
       span Civilité
-      p= selectedCivility
+      p#civility= selectedCivility
       div: ul
         each civility
           li(data-option, data-value=this)= this
@@ -17,10 +17,10 @@ article(data-role='insertUser')
       input(type='email', id='email', name='email', autocomplete='off', autocapitalize='off', minlength='5', maxlength='200')
       label(for='email'): span Email
     span.input
-      input(type='password', id='password', name='password', placeholder='', autocapitalize='off', minlength='6', maxlength='20')
+      input(type='password', id='password', name='password', autocapitalize='off', minlength='6', maxlength='20')
       label(for='password'): span Mot de passe
     span.checkbox
       label(for='admin') Compte administrateur
-      input(type='checkbox', id='admin', name='admin', value='true')
-    button.inspiration(data-role='add', type='button')
-      span Ajouter le nouvel utilisateur
+      input(type='checkbox', id='admin', name='admin')
+    button.inspiration(data-role='add', type='submit')
+      span J'ajoute le nouvel utilisateur

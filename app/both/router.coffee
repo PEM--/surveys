@@ -16,5 +16,5 @@ Router.map ->
   @route '/survey/:_id', name: 'survey', data: -> Surveys.findOne @params._id
   @route '/survey/edit/:_id', name: 'updateSurvey', \
     data: -> Surveys.findOne @params._id
-  @route '/admin'
+  @route '/admin', waitOn: -> Meteor.subscribe 'users'
   @route '/admin/user/new', name: 'insertUser'

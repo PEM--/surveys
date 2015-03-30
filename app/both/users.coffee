@@ -1,3 +1,5 @@
+nameRegEx = /^[a-z0-9A-Z_\-����]{2,30}$/
+
 @UserSchema = new SimpleSchema
   emails:
     type: [Object]
@@ -10,7 +12,7 @@
   profile:
     type: Object
   'profile.civility':
-    label: 'Civilité'
+    label: 'Civilit�'
     type: String
     allowedValues: ['M.', 'Mlle', 'Mme', 'Dr']
   'profile.name':
@@ -18,13 +20,13 @@
     type: String
     min: 2
     max: 30
-    regEx: /^[a-z0-9A-Z_]{2,30}$/
+    regEx: nameRegEx
   'profile.forname':
-    label: 'Prénom'
+    label: 'Pr�nom'
     type: String
     min: 2
     max: 30
-    regEx: /^[a-z0-9A-Z_]{2,30}$/
+    regEx: nameRegEx
   roles:
     blackbox: true
     type: Object
@@ -48,16 +50,28 @@ if Meteor.isServer
         civility: Meteor.settings.admin.civility
     Roles.addUsersToRoles adminId, ['admin'], Roles.GLOBAL_GROUP
   Meteor.publish null, -> Meteor.roles.find {}
-  Meteor.users.permit ['insert', 'update', 'remove']
-    .ifHasRole 'admin'
-    .apply()
-  ###
+  # Meteor.users.permit ['insert', 'update', 'remove']
+  #   .ifHasRole 'admin'
+  #   .apply()
+  Meteor.publish 'users', ->
+    if Roles.userIsInRole @userId, 'admin'
+      Meteor.users.find()
+    else
+      Meteor.users.find _id: @userId
   Meteor.methods
-    createUser: (user) ->
-      unless Meteor.user().hasRole 'admin'
-        console.log 'Current logged user isn\'t admin'
-        return false
-      unless Match.test user, UserSchema
-        console.log 'Shema validation failed'
-        return false
-  ###
+    mCreateUser: (user) ->
+      return 'Yes'
+      #throw new Meteor.error 'stuff', 'Marche pas ce machin'
+      # check user,
+      #   email: String
+      #   password: String
+      #   profile:
+      #     name: String
+      #     forname: String
+      #     civility: String
+      # unless Meteor.user().hasRole 'admin'
+      #   console.log 'Current logged user isn\'t admin'
+      #   return false
+      # unless Match.test user, UserSchema
+      #   console.log 'Shema validation failed'
+      #   return false

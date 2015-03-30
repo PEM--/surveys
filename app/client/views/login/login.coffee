@@ -1,12 +1,3 @@
-lightLoginSchema = new SimpleSchema
-  email:
-    type: String
-    regEx: SimpleSchema.RegEx.Email
-  password:
-    type: String
-    min: 6
-    max: 20
-
 checkAndAuthenticate = (username, password) ->
   notifyWrongCase = (username, password) ->
     username.removeClass 'shake'
@@ -39,8 +30,8 @@ Template.login.events
   'blur input[type=\'email\'], blur input[type=\'password\']': (e, t) ->
     (t.$ e.target).removeClass 'filled' if e.target.value.length is 0
   'click button': (e, t) ->
-    $button = t.$ e.target
-    $button = $button.parent() unless $button.is 'button'
+    e.preventDefault()
+    $button = t.$ '#validate'
     $button.addClass 'clicked'
     $button.on ANIMATION_END_EVENT, ->
       $button
